@@ -1,0 +1,28 @@
+.wrapper {
+  width: 500px;
+  background-color: var(--bgSoft);
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 30px;
+  border-radius: 5px;
+}
+
+.wrapper input {
+  border: none;
+  padding: 20px;
+  color: var(--textColor);
+  background-color: var(--bg);
+  border-radius: 5px;
+}
+
+.wrapper button {
+  padding: 20px;
+  cursor: pointer;
+  background-color: var(--btn);
+  color: var(--textColor);
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+}

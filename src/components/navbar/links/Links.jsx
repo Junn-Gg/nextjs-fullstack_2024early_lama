@@ -4,6 +4,8 @@ import { useState } from 'react';
 import styles from './links.module.css';
 import NavLinks from './navLinks/NavLinks';
 import Image from 'next/image';
+import { handleGithubLogout } from '@/lib/action';
+import { auth } from '@/lib/auth';
 
 const links = [
   {
@@ -24,11 +26,10 @@ const links = [
   },
 ];
 
-const Links = () => {
+const Links =  ({session}) => {
   const [open, setOpen] = useState(false);
 
   //Temporary
-  const session = true;
   const isAdmin = true;
 
   return (
@@ -37,10 +38,12 @@ const Links = () => {
         {links.map((link) => (
           <NavLinks item={link} key={link.title} />
         ))}
-        {session ? (
+        {session?.user ? (
           <>
-            {isAdmin && <NavLinks item={{ path: '/admin', title: 'Admin' }} />}
-            <button className={styles.logout}>Logout</button>
+            {session.user?.isAdmin && <NavLinks item={{ path: '/admin', title: 'Admin' }} />}
+            <form action={handleGithubLogout}>
+              <button className={styles.logout}>Logout</button>
+            </form>
           </>
         ) : (
           <NavLinks item={{ path: '/login', title: 'Login' }} />
@@ -49,7 +52,7 @@ const Links = () => {
 
       <Image
         src="/menu.png"
-        alt=''
+        alt=""
         width={30}
         height={30}
         className={styles.menuButton}
